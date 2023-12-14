@@ -4,16 +4,14 @@ function tryWord(word, base) {
     word = word.toUpperCase()
     base = base.toUpperCase()
 
-	if (word === base) {
-		return true
-  } else {
-  	let wellPlaced = [];
+    let wellPlaced = [];
     let notInWord = [];
     let missplaced = [];
 
   	let arrayBase = base.split('');
     let arrayWord = word.split('');
 
+	if (word !== base) {
 
 		for (let i = 0; i < arrayBase.length+1; i++) {
     	if (arrayBase[i] === arrayWord[i]) {
@@ -26,18 +24,27 @@ function tryWord(word, base) {
         else {
             wellPlaced.push('_');
             notInWord.push(arrayWord[i])
-
         }
-
         }
       }
       if (wellPlaced.length < arrayBase.length){
         console.log(wellPlaced.length,arrayBase.length)
         wellPlaced.push('_')
+
     }
+
 
     return { wellPlaced: wellPlaced, missplaced: missplaced, notInWord: notInWord }
   }
+
+  if (word === base) {
+    console.log("coucou")
+    wellPlaced = base.split('')
+
+    console.log(wellPlaced)
+    return { wellPlaced: wellPlaced, missplaced: missplaced, notInWord: notInWord }
+}
+
 }
 
 function guess() {
@@ -50,10 +57,8 @@ function guess() {
   document.getElementById("miss").innerText = 'Mal placé: '+result.missplaced.join('. ')
   document.getElementById("not").innerText = 'Pas dans le mot: '+result.notInWord.join('. ')
   if (result.wellPlaced.includes('_') === false){
-    document.getElementById("win").innerText = 'Vous avez gagné'
+    document.getElementById("win").innerHTML = '<b><u>Bravo, vous avez gagné</u></b>'
   }
-
-
 //   if (result.wellPlaced.length === base.length) {
 //
 //   }
